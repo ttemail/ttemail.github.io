@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout</title>
+  <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    Paddle.Environment.set('sandbox')
+    Paddle.Setup({ vendor: 12288 });
+
+    const params = new Proxy(new URLSearchParams(window.location.search || ""), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    if (params.planId && params.uid && params.app) {
+      Paddle.Checkout.open({
+        product: params.planId,
+        passthrough: '{"uid":"' + params.uid + '","app":' + params.app + "}",
+      });
+    }
+  </script>
+</body>
+
+</html>
