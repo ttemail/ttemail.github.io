@@ -12,7 +12,7 @@
 <body>
   <script type="text/javascript">
     Paddle.Environment.set('sandbox')
-    Paddle.Setup({ vendor: 12288 });
+    Paddle.Setup({ vendor: 170910 });
 
     const params = new Proxy(new URLSearchParams(window.location.search || ""), {
       get: (searchParams, prop) => searchParams.get(prop),
